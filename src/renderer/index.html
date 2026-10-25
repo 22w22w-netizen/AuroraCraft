@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AuroraCraft 极光启动器</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <header class="titlebar">
+    <div class="titlebar-left">
+      <div class="logo-mark">
+        <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#5eead4"/><stop offset="55%" stop-color="#818cf8"/><stop offset="100%" stop-color="#f472b6"/></linearGradient></defs>
+          <path d="M16 2 L29 9.5 L29 22.5 L16 30 L3 22.5 L3 9.5 Z" fill="url(#lg)" opacity="0.95"/>
+          <path d="M16 2 L29 9.5 L16 17 L3 9.5 Z" fill="#fff" opacity="0.25"/>
+        </svg>
+      </div>
+      <span class="brand-name">AuroraCraft</span>
+      <span class="brand-sub">极光启动器</span>
+    </div>
+    <div class="titlebar-center" id="titleStatus">就绪</div>
+    <div class="titlebar-right">
+      <button class="win-btn" id="btnMin" title="最小化"><svg viewBox="0 0 12 12" width="12" height="12"><rect x="2" y="5.5" width="8" height="1"/></svg></button>
+      <button class="win-btn" id="btnMax" title="最大化"><svg viewBox="0 0 12 12" width="12" height="12"><rect x="2.5" y="2.5" width="7" height="7" fill="none" stroke="currentColor" stroke-width="1"/></svg></button>
+      <button class="win-btn win-close" id="btnClose" title="关闭"><svg viewBox="0 0 12 12" width="12" height="12"><path d="M2.5 2.5 L9.5 9.5 M9.5 2.5 L2.5 9.5" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></button>
+    </div>
+  </header>
+
+  <div class="body">
+    <aside class="sidebar">
+      <nav class="nav">
+        <button class="nav-item active" data-view="home"><svg viewBox="0 0 24 24" width="19" height="19"><path d="M3 10.5 12 3l9 7.5V21H3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span>启动</span></button>
+        <button class="nav-item" data-view="versions"><svg viewBox="0 0 24 24" width="19" height="19"><rect x="3" y="4" width="18" height="6" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="14" width="18" height="6" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span>版本库</span></button>
+        <button class="nav-item" data-view="loader"><svg viewBox="0 0 24 24" width="19" height="19"><path d="M12 3v6m0 6v6M3 12h6m6 0h6" stroke="currentColor" stroke-width="1.7" fill="none"/><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span>Mod 加载器</span></button>
+        <button class="nav-item" data-view="store"><svg viewBox="0 0 24 24" width="19" height="19"><path d="M4 6h16M4 11h16M4 16h9" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linecap="round"/><circle cx="18" cy="16" r="2.4" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span>资源中心</span></button>
+        <button class="nav-item" data-view="java"><svg viewBox="0 0 24 24" width="19" height="19"><path d="M5 17c0 2 3 3 7 3s7-1 7-3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M9 4c0 2 4 2.5 4 5s-3 2.5-3 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Java</span></button>
+        <button class="nav-item" data-view="instances"><svg viewBox="0 0 24 24" width="19" height="19"><rect x="4" y="4" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13" y="4" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="4" y="13" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13" y="13" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/></svg><span>实例</span></button>
+        <button class="nav-item" data-view="settings"><svg viewBox="0 0 24 24" width="19" height="19"><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6l1.4 1.4m10 10 1.4 1.4m0-12.8-1.4 1.4m-10 10L5.6 18.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>设置</span></button>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="chip-btn" id="sourceChip" title="点击切换下载渠道"><span class="dot" id="sourceDot"></span><span id="sourceLabel">自动测速</span></button>
+        <div class="ver-line" id="appVer">v1.0.0</div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="view active" id="view-home">
+        <div class="hero">
+          <div class="hero-bg"></div>
+          <div class="hero-content">
+            <div class="hero-text">
+              <div class="hero-kicker">AURORACRAFT LAUNCHER</div>
+              <h1 class="hero-title">极光之下，<span class="grad">方块生辉</span></h1>
+              <p class="hero-desc">镜像加速 · 自动补全 Java · 多实例管理 · 离线登录</p>
+            </div>
+            <div class="hero-stats">
+              <div class="stat"><div class="stat-num" id="statVersions">—</div><div class="stat-label">版本可用</div></div>
+              <div class="stat"><div class="stat-num" id="statLocal">—</div><div class="stat-label">已安装</div></div>
+              <div class="stat"><div class="stat-num" id="statJava">—</div><div class="stat-label">Java 运行时</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="launch-grid">
+          <div class="card launch-card">
+            <div class="card-head"><h2>启动游戏</h2><span class="badge" id="launchChannelBadge">自动</span></div>
+            <div class="field-row"><label>实例</label><select id="selInstance" class="input"></select></div>
+            <div class="field-row"><label>版本</label><select id="selVersion" class="input"></select></div>
+            <div class="field-row">
+              <label>玩家名</label>
+              <div class="input-with-hint">
+                <input id="inpUsername" class="input" type="text" placeholder="3-16 位字母/数字/下划线" maxlength="16">
+                <span class="hint-uuid" id="uuidHint" title="离线 UUID（自动派生）">—</span>
+              </div>
+            </div>
+            <div class="field-row"><label>Java</label><select id="selJava" class="input"><option value="">自动选择（推荐）</option></select></div>
+            <div class="memory-row">
+              <label>内存</label>
+              <div class="mem-sliders">
+                <div class="mem-item"><span>最小</span><input id="inpMemMin" type="number" class="input small" min="256" step="256"><span class="unit">MB</span></div>
+                <div class="mem-item"><span>最大</span><input id="inpMemMax" type="number" class="input small" min="512" step="256"><span class="unit">MB</span></div>
+              </div>
+            </div>
+            <div class="launch-actions">
+              <button class="btn primary big" id="btnLaunch"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M8 5v14l11-7z" fill="currentColor"/></svg><span>启动游戏</span></button>
+              <button class="btn ghost" id="btnVerify" title="无头验证：检查依赖完整性与启动命令，不启动游戏"><svg viewBox="0 0 24 24" width="17" height="17"><path d="M4 12.5 9.5 18 20 6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>无头验证</span></button>
+              <button class="btn ghost danger" id="btnKillGame" title="结束当前游戏进程" disabled><svg viewBox="0 0 24 24" width="17" height="17"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span>结束</span></button>
+            </div>
+            <div class="launch-status" id="launchStatus"></div>
+          </div>
+
+          <div class="card progress-card">
+            <div class="card-head"><h2>下载进度</h2><span class="badge muted" id="stageText">空闲</span></div>
+            <div class="big-progress">
+              <svg viewBox="0 0 120 120" class="ring">
+                <circle cx="60" cy="60" r="52" class="ring-bg"/>
+                <circle cx="60" cy="60" r="52" class="ring-fg" id="ringFg"/>
+              </svg>
+              <div class="ring-center"><div class="ring-pct" id="ringPct">0%</div><div class="ring-sub" id="ringSub">等待任务</div></div>
+            </div>
+            <div class="prog-meta">
+              <div class="meta-item"><span class="k">文件</span><span class="v" id="progFiles">—</span></div>
+              <div class="meta-item"><span class="k">已传输</span><span class="v" id="progBytes">—</span></div>
+              <div class="meta-item"><span class="k">速度</span><span class="v" id="progSpeed">—</span></div>
+            </div>
+            <div class="current-files" id="currentFiles"></div>
+          </div>
+        </div>
+
+        <div class="card log-card">
+          <div class="card-head"><h2>控制台</h2><div class="head-actions"><button class="mini-btn" id="btnClearLog">清空</button><button class="mini-btn" id="btnCopyLog">复制</button></div></div>
+          <pre class="console" id="console"></pre>
+        </div>
+      </section>
+
+      <section class="view" id="view-versions">
+        <div class="page-head">
+          <div><h1>版本库</h1><p class="page-desc">下载游戏版本、库文件与资源。支持官方 / BMCLAPI / BangBang 三档渠道。</p></div>
+          <div class="head-actions"><button class="btn ghost" id="btnRefreshManifest">刷新清单</button><button class="btn ghost" id="btnSpeedTest">测速</button></div>
+        </div>
+        <div class="card">
+          <div class="toolbar">
+            <div class="search-wrap">
+              <svg viewBox="0 0 24 24" width="16" height="16" class="search-icon"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 16l4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <input id="inpFilter" class="input search" type="text" placeholder="搜索版本号…">
+            </div>
+            <div class="seg" id="segVersionType">
+              <button class="seg-btn active" data-type="release">正式版</button>
+              <button class="seg-btn" data-type="snapshot">快照</button>
+              <button class="seg-btn" data-type="all">全部</button>
+              <button class="seg-btn" data-type="installed">已安装</button>
+            </div>
+          </div>
+          <div class="versions-layout">
+            <div class="versions-list" id="versionsList"><div class="empty-state">点击「刷新清单」加载版本列表</div></div>
+            <div class="version-detail" id="versionDetail"><div class="empty-state">选择左侧版本查看详情</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-loader">
+        <div class="page-head"><div><h1>Mod 加载器</h1><p class="page-desc">为已安装的版本安装 Fabric / Forge / NeoForge / Quilt。</p></div></div>
+        <div class="loader-grid">
+          <div class="card loader-card">
+            <div class="loader-tabs" id="loaderTabs">
+              <button class="loader-tab active" data-loader="fabric">Fabric</button>
+              <button class="loader-tab" data-loader="forge">Forge</button>
+              <button class="loader-tab" data-loader="neoforge">NeoForge</button>
+              <button class="loader-tab" data-loader="quilt">Quilt</button>
+            </div>
+            <div class="field-row"><label>基础版本</label><select id="selLoaderMc" class="input"></select></div>
+            <div class="field-row"><label>加载器版本</label><div class="inline"><select id="selLoaderVersion" class="input"></select><button class="btn ghost sm" id="btnLoadLoaderVersions">加载</button></div></div>
+            <div class="loader-actions"><button class="btn primary" id="btnInstallLoader">安装</button></div>
+            <div class="launch-status" id="loaderStatus"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>说明</h2></div>
+            <ul class="info-list">
+              <li><b>Fabric / Quilt</b>：拉取官方 profile JSON（含 mainClass 与库列表），下载库后直接生成版本。</li>
+              <li><b>Forge / NeoForge</b>：下载官方安装器，调用 Java 执行 <code>--installClient</code> 完成安装。</li>
+              <li>安装完成后，新版本会出现在「版本库 → 已安装」与启动页版本列表中。</li>
+              <li>加载器版本需要与基础游戏版本兼容，建议选择最新稳定版。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-store">
+        <div class="page-head">
+          <div><h1>资源中心</h1><p class="page-desc">从 Modrinth 安装模组、光影、资源包与整合包；中文汉化包可一站搜索。</p></div>
+          <div class="head-actions"><button class="btn ghost" id="btnStoreHelp">来源说明</button></div>
+        </div>
+
+        <div class="card">
+          <div class="toolbar store-toolbar">
+            <div class="search"><input id="storeQuery" placeholder="搜索模组 / 光影 / 整合包，例如 sodium、iris、汉化"></div>
+            <select id="storeKind">
+              <option value="mod">模组</option>
+              <option value="shader">光影</option>
+              <option value="resourcepack">资源包</option>
+              <option value="modpack">整合包</option>
+              <option value="zhcn">中文汉化包</option>
+            </select>
+            <select id="storeLoader">
+              <option value="">全部加载器</option>
+              <option value="fabric">Fabric</option>
+              <option value="quilt">Quilt</option>
+              <option value="forge">Forge</option>
+              <option value="neoforge">NeoForge</option>
+            </select>
+            <input id="storeVersion" class="store-ver" placeholder="游戏版本" value="1.20.1">
+            <button class="btn primary" id="btnStoreSearch">搜索</button>
+          </div>
+          <div class="version-meta"><span id="storeCount">等待搜索</span><span class="muted">安装目的一律为当前游戏目录</span></div>
+          <div class="store-grid" id="storeGrid"></div>
+          <div id="storeEmpty" class="empty hidden"><div class="empty-icon">◇</div><h3>还没有结果</h3><p>输入关键词后点击「搜索」。</p></div>
+        </div>
+
+        <div class="card store-note">
+          <div class="card-head"><h2>关于来源</h2></div>
+          <ul class="store-note-list">
+            <li><strong>模组 / 光影 / 资源包 / 整合包</strong>：来自 Modrinth 公共 API，可直接下载安装。</li>
+            <li><strong>中文汉化包</strong>：按「汉化 / 简体中文 / Chinese translation」检索社区汉化资源包，安装到 <code>resourcepacks</code>。</li>
+            <li><strong>MCBBS 已关停</strong>：其域名当前无法解析，无法作为下载源。</li>
+            <li><strong>MC百科</strong>：无公开下载 API，提供「在 MC百科 搜索」外链用于查中文译名与资料。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="view" id="view-java">
+        <div class="page-head">
+          <div><h1>Java 运行时</h1><p class="page-desc">自动检测系统 Java，或从 TUNA Adoptium 镜像 / Mojang 官方下载。</p></div>
+          <div class="head-actions"><button class="btn ghost" id="btnDetectJava">重新检测</button></div>
+        </div>
+        <div class="java-grid">
+          <div class="card">
+            <div class="card-head"><h2>已检测</h2><span class="badge muted" id="javaCount">0</span></div>
+            <div class="java-list" id="javaList"><div class="empty-state">正在检测…</div></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>下载 Java</h2></div>
+            <div class="tabs-mini" id="javaSourceTabs">
+              <button class="tab-mini active" data-src="adoptium">TUNA Adoptium</button>
+              <button class="tab-mini" data-src="mojang">Mojang 官方</button>
+            </div>
+            <div id="paneAdoptium">
+              <div class="field-row">
+                <label>主版本</label>
+                <div class="inline">
+                  <select id="selAdoptiumMajor" class="input">
+                    <option value="8">Java 8 (LTS)</option>
+                    <option value="11">Java 11 (LTS)</option>
+                    <option value="17">Java 17 (LTS)</option>
+                    <option value="21" selected>Java 21 (LTS)</option>
+                    <option value="25">Java 25 (LTS)</option>
+                  </select>
+                  <select id="selAdoptiumType" class="input"><option value="jdk" selected>JDK</option><option value="jre">JRE</option></select>
+                </div>
+              </div>
+              <button class="btn ghost" id="btnListAdoptium">查询可用版本</button>
+              <div class="java-list" id="adoptiumList" style="margin-top:12px"></div>
+            </div>
+            <div id="paneMojang" style="display:none">
+              <button class="btn ghost" id="btnListMojang">加载 Mojang 运行时列表</button>
+              <div class="java-list" id="mojangList" style="margin-top:12px"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-instances">
+        <div class="page-head">
+          <div><h1>实例管理</h1><p class="page-desc">每个实例可绑定独立版本、Java、内存与窗口设置。</p></div>
+          <div class="head-actions"><input id="inpNewInstance" class="input" type="text" placeholder="新实例名称" style="width:180px"><button class="btn primary" id="btnCreateInstance">新建实例</button></div>
+        </div>
+        <div class="instances-grid" id="instancesGrid"></div>
+      </section>
+
+      <section class="view" id="view-settings">
+        <div class="page-head">
+          <div><h1>设置</h1><p class="page-desc">下载渠道、并发、路径与启动参数。</p></div>
+          <div class="head-actions"><button class="btn primary" id="btnSaveSettings">保存设置</button></div>
+        </div>
+        <div class="settings-grid">
+          <div class="card">
+            <div class="card-head"><h2>下载渠道</h2></div>
+            <div class="source-cards" id="sourceCards"></div>
+            <div class="speed-results" id="speedResults"></div>
+            <button class="btn ghost" id="btnSpeedTest2" style="margin-top:12px">重新测速</button>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>下载</h2></div>
+            <div class="field-row"><label>并发线程数</label><input id="setThreads" class="input" type="number" min="1" max="32"></div>
+            <div class="field-row"><label>游戏目录</label><div class="inline"><input id="setGameDir" class="input" type="text" placeholder="默认：启动器数据目录"><button class="btn ghost sm" id="btnPickGameDir">浏览</button></div></div>
+            <div class="path-actions">
+              <button class="mini-btn" data-open="game">打开游戏目录</button>
+              <button class="mini-btn" data-open="launcher">打开启动器目录</button>
+              <button class="mini-btn" data-open="java">打开 Java 目录</button>
+              <button class="mini-btn" id="btnClearCache">清空元数据缓存</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>启动参数</h2></div>
+            <div class="field-row"><label>JVM 参数</label><input id="setJvmArgs" class="input" type="text" placeholder="-XX:+UseG1GC …"></div>
+            <div class="field-row"><label>游戏参数</label><input id="setGameArgs" class="input" type="text" placeholder="--fullscreen …"></div>
+            <div class="field-row"><label>默认窗口</label><div class="inline"><input id="setWidth" class="input small" type="number" placeholder="宽"><span class="unit">×</span><input id="setHeight" class="input small" type="number" placeholder="高"></div></div>
+            <div class="field-row"><label>默认 Java</label><div class="inline"><input id="setJavaPath" class="input" type="text" placeholder="留空则自动选择"><button class="btn ghost sm" id="btnPickJava">浏览</button></div></div>
+            <label class="check-row"><input type="checkbox" id="setAutoJava"><span>自动补全 Java（按版本要求选择或下载）</span></label>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>存储占用</h2></div>
+            <div class="size-list" id="sizeList"><div class="empty-state">正在统计…</div></div>
+            <div class="card-head" style="margin-top:18px"><h2>关于</h2></div>
+            <div class="about-list" id="aboutList"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="toasts" id="toasts"></div>
+
+  <div class="modal-mask" id="modalMask">
+    <div class="modal">
+      <div class="modal-head">
+        <span class="modal-title" id="modalTitle">提示</span>
+        <button class="win-btn" id="modalClose"><svg viewBox="0 0 12 12" width="12" height="12"><path d="M2.5 2.5 L9.5 9.5 M9.5 2.5 L2.5 9.5" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-foot" id="modalFoot"></div>
+    </div>
+  </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

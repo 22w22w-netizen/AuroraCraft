@@ -1,0 +1,53 @@
+# 依赖
+node_modules/
+.pnpm-store/
+
+# 构建产物
+dist/
+release/
+out/
+*.asar
+*.7z
+*.zip
+*.mrpack
+
+# 运行期数据 / 下载缓存
+.acdata/
+.cache/
+_work/
+.minecraft/
+java/
+minecraft/
+
+# 临时与调试
+_probe/
+.tmp/
+*.log
+*.jar
+*.part
+*.tmp
+*.tmpdir/
+npm-debug.log*
+yarn-error.log*
+
+# 证书与密钥（切勿提交）
+*.pfx
+*.p12
+*.pem
+*.key
+*.cer
+*.crt
+
+# 系统文件
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# 编辑器
+.vscode/
+.idea/
+*.swp
+
+# 测试/验证缓存
+.verify/
+

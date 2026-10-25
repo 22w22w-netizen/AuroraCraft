@@ -1,0 +1,71 @@
+{
+  "name": "auroracraft-launcher",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AuroraCraft Launcher - 极光启动器，精美的中文 Minecraft 启动器",
+  "main": "src/main/main.js",
+  "author": {
+    "name": "AuroraCraft",
+    "email": "support@auroracraft.local"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev": "set AC_DEVTOOLS=1&& electron .",
+    "headless:install": "node tools/headless-install.js",
+    "headless:launch": "node tools/headless-launch.js",
+    "verify": "node tools/headless-launch.js --verify-only",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --win nsis",
+    "sign": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/sign.ps1"
+  },
+  "devDependencies": {
+    "electron": "45.0.0"
+  },
+  "build": {
+    "appId": "com.auroracraft.launcher",
+    "productName": "AuroraCraft",
+    "copyright": "Copyright © 2026 AuroraCraft",
+    "asar": true,
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "tools/**/*",
+      "README.md",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "artifactName": "AuroraCraft-${version}-x64.${ext}",
+      "requestedExecutionLevel": "asInvoker"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "极光启动器",
+      "menuCategory": "游戏",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico",
+      "installerLanguages": ["zh_CN"],
+      "language": "2052",
+      "multiLanguageInstaller": false,
+      "deleteAppDataOnUninstall": false,
+      "runAfterFinish": true,
+      "artifactName": "AuroraCraft-Setup-${version}.${ext}"
+    }
+  }
+}
