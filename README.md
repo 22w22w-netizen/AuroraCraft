@@ -364,6 +364,60 @@ powershell -File scripts/sign.ps1 -File release\AuroraCraft-Setup-1.0.0.exe -Pfx
 
 ---
 
+## 🐧🍎 Linux / macOS 产物
+
+在 Windows 上构建（`build/package_multi.py`），产物位于 `release/multi/`：
+
+| 文件 | 大小 | 说明 |
+| --- | --- | --- |
+| `AuroraCraft-1.0.0-amd64.deb` | 117.9 MB | Debian/Ubuntu 安装包（符合 dpkg 规范） |
+| `AuroraCraft-1.0.0-linux-x64.tar.gz` | 117.9 MB | Linux 便携版，解压即用 |
+| `AuroraCraft-1.0.0-mac-x64.zip` | 119.3 MB | macOS Intel 版（`.app` 包） |
+| `AuroraCraft-1.0.0-mac-arm64.zip` | 115.1 MB | macOS Apple Silicon 版（`.app` 包） |
+| `SHA256SUMS.txt` | — | 全部产物的 SHA-256 校验和 |
+
+### Linux
+
+```bash
+# Debian / Ubuntu
+sudo dpkg -i AuroraCraft-1.0.0-amd64.deb
+sudo apt -f install          # 若提示缺依赖
+
+# 便携版
+tar -xzf AuroraCraft-1.0.0-linux-x64.tar.gz
+./AuroraCraft-linux-x64/auroracraft
+```
+
+deb 会安装到 `/opt/auroracraft`，并注册 `/usr/bin/auroracraft` 启动脚本、
+应用菜单项 `auroracraft.desktop` 与 256×256 图标。
+
+### macOS
+
+```bash
+unzip AuroraCraft-1.0.0-mac-arm64.zip     # Apple Silicon
+unzip AuroraCraft-1.0.0-mac-x64.zip       # Intel
+open AuroraCraft.app
+```
+
+首次打开若被 Gatekeeper 拦截，请**右键 → 打开**，或执行 `xattr -cr AuroraCraft.app`。
+
+### 构建原理与限制
+
+本机为 Windows，因此：
+
+- **符号链接**：Electron 的 macOS `.app` 内含 14 个 framework 符号链接。
+  Windows 无法创建真实符号链接，故打包时把符号链接条目**直接写入 zip**
+  （Unix mode `S_IFLNK` + 相对目标路径），在 macOS 上解压会被正确还原。
+- **权限位**：通过 tar/zip 的 Unix mode 字段写入 —— `auroracraft` 与
+  `MacOS/AuroraCraft` 为 `0755`，`chrome-sandbox` 为 `4755`。
+- **.deb**：手工构造 ar 归档 + `control.tar.gz` + `data.tar.gz`，不依赖 `fpm`。
+- **.dmg 无法在此生成**：真正的 dmg 需要 macOS 的 `hdiutil`，公证（notarization）
+  需要 Apple Developer 账号。本产物以 zip 形式分发，属常见做法。
+- **未在本机验证运行**：Windows 无法执行 Linux/macOS 二进制，以上仅完成结构与
+  元数据校验。实际运行需在对应系统上验证。
+
+---
+
 ## 🔧 技术要点
 
 **依赖零负担** —— 除 Electron 外无运行时依赖。所有下载、解压、JSON 解析、ZIP 读取均用 Node 内置模块实现。

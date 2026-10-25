@@ -1,0 +1,16 @@
+# 统一使用 LF，避免 Windows/macOS/Linux 之间的行尾抖动
+* text=auto eol=lf
+
+# 明确的二进制类型
+*.ico   binary
+*.icns  binary
+*.png   binary
+*.zip   binary
+*.gz    binary
+*.7z    binary
+*.jar   binary
+*.deb   binary
+*.exe   binary
+*.nsi   text eol=crlf
+*.cmd   text eol=crlf
+*.ps1   text eol=crlf
