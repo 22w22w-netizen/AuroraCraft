@@ -51,3 +51,9 @@ desktop.ini
 # 测试/验证缓存
 .verify/
 
+# Python
+__pycache__/
+*.pyc
+
+# 损坏的旧仓库备份（文件系统异常，无法删除）
+.git.broken/
